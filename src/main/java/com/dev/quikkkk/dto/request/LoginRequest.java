@@ -15,10 +15,10 @@ import lombok.Setter;
 @Builder
 public class LoginRequest {
     @NotBlank(message = "VALIDATION.AUTHENTICATION.USERNAME.NOT_BLANK")
-    @Schema(name = "john")
+    @Schema(example = "john")
     private String username;
 
     @NotBlank(message = "VALIDATION.AUTHENTICATION.PASSWORD.NOT_BLANK")
-    @Schema(name = "<PASSWORD>")
+    @Schema(example = "<PASSWORD>")
     private String password;
 }

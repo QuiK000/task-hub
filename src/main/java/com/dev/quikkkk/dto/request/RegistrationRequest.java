@@ -20,24 +20,24 @@ import lombok.Setter;
 public class RegistrationRequest {
     @NotBlank(message = "VALIDATION.REGISTRATION.USERNAME.NOT_BLANK")
     @Size(min = 3, max = 50, message = "VALIDATION.REGISTRATION.USERNAME.SIZE")
-    @Schema(name = "john")
+    @Schema(example = "john")
     private String username;
 
     @NotBlank(message = "VALIDATION.REGISTRATION.EMAIL.NOT_BLANK")
     @Size(min = 3, max = 50, message = "VALIDATION.REGISTRATION.EMAIL.SIZE")
     @Email(message = "VALIDATION.REGISTRATION.EMAIL.FORMAT")
     @NonDisposableEmail(message = "VALIDATION.REGISTRATION.EMAIL.DISPOSABLE")
-    @Schema(name = "email@mail.com")
+    @Schema(example = "email@mail.com")
     private String email;
 
     @NotBlank(message = "VALIDATION.REGISTRATION.PASSWORD.NOT_BLANK")
     @Size(min = 8, max = 50, message = "VALIDATION.REGISTRATION.PASSWORD.SIZE")
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*\\W).*$", message = "VALIDATION.REGISTRATION.PASSWORD.WEAK")
-    @Schema(name = "<PASSWORD>")
+    @Schema(example = "<PASSWORD>")
     private String password;
 
     @NotBlank(message = "VALIDATION.REGISTRATION.CONFIRM_PASSWORD.NOT_BLANK")
     @Size(min = 8, max = 50, message = "VALIDATION.REGISTRATION.CONFIRM_PASSWORD.SIZE")
-    @Schema(name = "<CONFIRM_PASSWORD>")
+    @Schema(example = "<CONFIRM_PASSWORD>")
     private String confirmPassword;
 }
