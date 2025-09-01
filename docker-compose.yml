@@ -30,7 +30,7 @@ services:
     depends_on:
       - redis
     ports:
-      - "8001:8001"
+      - "5540:5540"
     volumes:
       - redis-insight-data:/data
     environment:
