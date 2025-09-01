@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: Task-hub
+  config:
+    activate:
+      on-profile: default
+  data:
+    redis:
+      host: localhost
+      port: 6380
+      database: 0
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/task_db
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+      default_schema: public
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+  cache:
+    ttl-seconds: 300
