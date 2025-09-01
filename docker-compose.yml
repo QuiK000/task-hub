@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: task-hub-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: task_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - network
+  redis:
+    image: redis:latest
+    container_name: task-hub-redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    networks:
+      - network
+  redis-insight:
+    image: redis/redisinsight:latest
+    container_name: task-hub-redis-insight
+    restart: unless-stopped
+    depends_on:
+      - redis
+    ports:
+      - "8001:8001"
+    volumes:
+      - redis-insight-data:/data
+    environment:
+      - RHI_REDIS_HOST=redis
+      - RHI_REDIS_PORT=6379
+    networks:
+      - network
+  mongodb:
+    image: mongo:latest
+    container_name: task-hub-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: task_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - network
+
+volumes:
+  pgdata:
+  redis-insight-data:
+  mongodb_data:
+    driver: local
+
+networks:
+  network:
+    driver: bridge
