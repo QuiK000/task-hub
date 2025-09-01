@@ -23,5 +23,11 @@ spring:
         format_sql: true
       default_schema: public
       database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+app:
   cache:
     ttl-seconds: 300
+  security:
+    jwt:
+      access-token-expiration: 86400000
+      refresh-token-expiration: 684000000
