@@ -20,8 +20,8 @@ import java.util.Map;
 public class JwtServiceImpl implements IJwtService {
     private static final String TOKEN_TYPE = "token_type";
     private static final String USER_ID = "userId";
-    private static final String PATH_TO_PRIVATE_KEY = "keys/local-only/private-key.pem";
-    private static final String PATH_TO_PUBLIC_KEY = "keys/local-only/public-key.pem";
+    private static final String PATH_TO_PRIVATE_KEY = "keys/local-only/private_key.pem";
+    private static final String PATH_TO_PUBLIC_KEY = "keys/local-only/public_key.pem";
 
     private final PrivateKey privateKey;
     private final PublicKey publicKey;
