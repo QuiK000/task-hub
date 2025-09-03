@@ -84,12 +84,12 @@ public class User implements UserDetails {
             fetch = FetchType.LAZY
     )
     @JoinTable(
-            name = "users_roles",
+            name = "USERS_ROLES",
             joinColumns = {
-                    @JoinColumn(name = "users_id")
+                    @JoinColumn(name = "USER_ID")
             },
             inverseJoinColumns = {
-                    @JoinColumn(name = "roles_id")
+                    @JoinColumn(name = "ROLES_ID")
             }
     )
     private Set<Role> roles = new HashSet<>();
@@ -116,10 +116,5 @@ public class User implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.enabled;
     }
 }
