@@ -91,7 +91,8 @@ public class JwtServiceImpl implements IJwtService {
 
     @Override
     public boolean isTokenValid(String token, String expectedUsername) {
-        return false;
+        String username = extractUsername(token);
+        return username.equals(expectedUsername) && !isTokenExpired(token);
     }
 
     private String buildToken(String username, Map<String, Object> claims, long accessTokenExpiration) {
