@@ -4,6 +4,7 @@ import com.dev.quikkkk.dto.request.LoginRequest;
 import com.dev.quikkkk.dto.request.RefreshRequest;
 import com.dev.quikkkk.dto.request.RegistrationRequest;
 import com.dev.quikkkk.dto.response.AuthenticationResponse;
+import com.dev.quikkkk.dto.response.UserResponse;
 import com.dev.quikkkk.entity.Role;
 import com.dev.quikkkk.entity.User;
 import com.dev.quikkkk.exception.BusinessException;
@@ -26,6 +27,7 @@ import java.util.Set;
 import static com.dev.quikkkk.exception.ErrorCode.EMAIL_ALREADY_EXISTS;
 import static com.dev.quikkkk.exception.ErrorCode.PASSWORD_MISMATCH;
 import static com.dev.quikkkk.exception.ErrorCode.USERNAME_ALREADY_EXISTS;
+import static com.dev.quikkkk.exception.ErrorCode.USER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -96,6 +98,14 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 
         defaultRole.getUsers().add(user);
         roleRepository.save(defaultRole);
+    }
+
+    @Override
+    public UserResponse getUserById(String id) {
+        return userRepository
+                .findById(id)
+                .map(userMapper::toUserResponse)
+                .orElseThrow(() -> new BusinessException(USER_NOT_FOUND));
     }
 
     private void checkUserEmail(String email) {
