@@ -20,8 +20,9 @@ public class ApplicationAuditorAware implements AuditorAware<String> {
         ) return Optional.empty();
 
         Object principal = authentication.getPrincipal();
-        if (principal instanceof UserPrincipal userPrincipal) return Optional.ofNullable(userPrincipal.id());
 
+        if (principal instanceof UserPrincipal userPrincipal) return Optional.ofNullable(userPrincipal.id());
         return Optional.empty();
     }
 }
+
