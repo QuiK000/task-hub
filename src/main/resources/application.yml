@@ -9,6 +9,8 @@ spring:
       host: localhost
       port: 6380
       database: 0
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/task_db
   datasource:
     username: postgres
     password: postgres
