@@ -2,7 +2,7 @@ package com.dev.quikkkk.service.Impl;
 
 import com.dev.quikkkk.dto.response.UserResponse;
 import com.dev.quikkkk.entity.User;
-import com.dev.quikkkk.entity.UserRedisEntity;
+import com.dev.quikkkk.entity.redis.UserRedisEntity;
 import com.dev.quikkkk.mapper.UserMapper;
 import com.dev.quikkkk.repository.IUserRedisRepository;
 import com.dev.quikkkk.service.IUserCacheService;
