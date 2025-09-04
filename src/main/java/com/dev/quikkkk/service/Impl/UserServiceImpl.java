@@ -6,11 +6,13 @@ import com.dev.quikkkk.entity.User;
 import com.dev.quikkkk.exception.BusinessException;
 import com.dev.quikkkk.mapper.UserMapper;
 import com.dev.quikkkk.repository.IUserRepository;
+import com.dev.quikkkk.service.IRoleValidationService;
 import com.dev.quikkkk.service.IUserCacheService;
 import com.dev.quikkkk.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.Set;
@@ -25,6 +27,7 @@ public class UserServiceImpl implements IUserService {
     private final IUserRepository userRepository;
     private final IUserCacheService userCacheService;
     private final UserMapper userMapper;
+    private final IRoleValidationService roleValidationService;
 
     @Override
     public Set<UserResponse> getAllUsers() {
@@ -50,8 +53,9 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional
     public UserResponse updateUser(String id, UpdateUserRequest request) {
-        return null;
+        return null; // TODO: todo...
     }
 
     @Override
