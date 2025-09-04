@@ -1,4 +1,4 @@
-package com.dev.quikkkk.entity;
+package com.dev.quikkkk.entity.redis;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
@@ -10,6 +10,8 @@ import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.TimeToLive;
+
+import java.time.LocalDateTime;
 
 @RedisHash("users")
 @Getter
@@ -29,8 +31,8 @@ public class UserRedisEntity {
     private boolean locked;
     private boolean expired;
     private boolean emailVerified;
-    private String createdDate;
-    private String lastModifiedDate;
+    private LocalDateTime createdDate;
+    private LocalDateTime lastModifiedDate;
 
     @TimeToLive
     private long timeToLive;

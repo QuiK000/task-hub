@@ -3,7 +3,7 @@ package com.dev.quikkkk.mapper;
 import com.dev.quikkkk.dto.request.RegistrationRequest;
 import com.dev.quikkkk.dto.response.UserResponse;
 import com.dev.quikkkk.entity.User;
-import com.dev.quikkkk.entity.UserRedisEntity;
+import com.dev.quikkkk.entity.redis.UserRedisEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
