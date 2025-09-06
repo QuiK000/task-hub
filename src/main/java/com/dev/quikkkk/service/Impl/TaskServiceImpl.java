@@ -63,12 +63,24 @@ public class TaskServiceImpl implements ITaskService {
 
     @Override
     public TaskResponse updateTask(String id, UpdateTaskRequest request) {
-        return null;
+        Task task = validateTask(id);
+
+        taskCacheService.evict(id);
+        taskMapper.mergeTask(task, request);
+        Task taskResponse = taskRepository.save(task);
+
+        return taskMapper.toTaskResponse(taskResponse);
     }
 
     @Override
     public void deleteTask(String id) {
         taskRepository.deleteById(id);
         taskCacheService.evict(id);
+    }
+
+    private Task validateTask(String taskId) {
+        return taskRepository
+                .findById(taskId)
+                .orElseThrow(() -> new BusinessException(TASK_NOT_FOUND));
     }
 }

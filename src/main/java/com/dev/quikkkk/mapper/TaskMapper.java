@@ -1,6 +1,7 @@
 package com.dev.quikkkk.mapper;
 
 import com.dev.quikkkk.dto.request.CreateTaskRequest;
+import com.dev.quikkkk.dto.request.UpdateTaskRequest;
 import com.dev.quikkkk.dto.response.TaskResponse;
 import com.dev.quikkkk.entity.Project;
 import com.dev.quikkkk.entity.Task;
@@ -10,6 +11,7 @@ import com.dev.quikkkk.entity.redis.TaskRedisEntity;
 import com.dev.quikkkk.exception.BusinessException;
 import com.dev.quikkkk.exception.ErrorCode;
 import com.dev.quikkkk.repository.IUserRepository;
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +48,7 @@ public class TaskMapper {
                 .status(task.getStatus())
                 .projectId(task.getProjectId().getId())
                 .assigneeId(task.getAssigneeId() != null ? task.getAssigneeId().getId() : null)
-                .createdDate(task.getCreatedBy())
+                .createdDate(task.getCreatedDate() != null ? task.getCreatedDate().toString() : null)
                 .build();
     }
 
@@ -59,7 +61,7 @@ public class TaskMapper {
                 .status(task.getStatus())
                 .projectId(task.getProjectId().getId())
                 .assigneeId(task.getAssigneeId() != null ? task.getAssigneeId().getId() : null)
-                .createdAt(task.getCreatedBy())
+                .createdAt(task.getCreatedDate() != null ? task.getCreatedDate().toString() : null)
                 .build();
     }
 
@@ -74,5 +76,24 @@ public class TaskMapper {
                 .assigneeId(entity.getAssigneeId())
                 .createdAt(entity.getCreatedDate())
                 .build();
+    }
+
+    public void mergeTask(Task task, UpdateTaskRequest request) {
+        if (StringUtils.isNotBlank(request.getTitle()) && !request.getTitle().equals(task.getTitle()))
+            task.setTitle(request.getTitle());
+
+        if (StringUtils.isNotBlank(request.getDescription()) && !request.getDescription().equals(task.getDescription()))
+            task.setDescription(request.getDescription());
+
+        if (request.getAssigneeId() != null) {
+            if (request.getAssigneeId().isEmpty()) {
+                task.setAssigneeId(null);
+            } else {
+                User assignee = userRepository
+                        .findById(request.getAssigneeId())
+                        .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
+                task.setAssigneeId(assignee);
+            }
+        }
     }
 }
