@@ -28,6 +28,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -96,7 +97,10 @@ public class User implements UserDetails {
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "ownerId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Project> projects = new HashSet<>();
+    private List<Project> projects = new ArrayList<>();
+
+    @OneToMany(mappedBy = "assigneeId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Task> tasks = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
