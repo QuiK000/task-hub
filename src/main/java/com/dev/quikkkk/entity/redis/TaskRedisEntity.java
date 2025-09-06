@@ -1,7 +1,6 @@
 package com.dev.quikkkk.entity.redis;
 
 import com.dev.quikkkk.entity.common.TaskStatus;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
@@ -10,7 +9,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.TimeToLive;
 
@@ -20,7 +18,6 @@ import org.springframework.data.redis.core.TimeToLive;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EntityListeners(AuditingEntityListener.class)
 public class TaskRedisEntity {
     @Id
     private String id;
