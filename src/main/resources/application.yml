@@ -10,7 +10,7 @@ spring:
       port: 6380
       database: 0
     mongodb:
-      uri: mongodb://root:root@localhost:27017/task_db
+      uri: mongodb://root:root@localhost:27017/task_db?authSource=admin
   datasource:
     username: postgres
     password: postgres
