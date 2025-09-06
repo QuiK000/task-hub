@@ -32,6 +32,7 @@ public enum ErrorCode {
     INVALID_SEARCH_OPERATION("INVALID_SEARCH_OPERATION", "Invalid search operation", BAD_REQUEST),
     CHANGE_PASSWORD_MISMATCH("CHANGE_PASSWORD_MISMATCH", "Change password mismatch", BAD_REQUEST),
     PROJECT_NOT_FOUND("PROJECT_NOT_FOUND", "Project not found", NOT_FOUND),
+    TASK_NOT_FOUND("TASK_NOT_FOUND", "Task not found", NOT_FOUND),
     ;
 
     private final String code;
