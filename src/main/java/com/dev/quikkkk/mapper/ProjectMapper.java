@@ -1,11 +1,13 @@
 package com.dev.quikkkk.mapper;
 
 import com.dev.quikkkk.dto.request.CreateProjectRequest;
+import com.dev.quikkkk.dto.request.UpdateProjectRequest;
 import com.dev.quikkkk.dto.response.ProjectResponse;
 import com.dev.quikkkk.entity.Project;
 import com.dev.quikkkk.entity.User;
 import com.dev.quikkkk.entity.redis.ProjectRedisEntity;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -51,5 +53,13 @@ public class ProjectMapper {
                 .ownerId(project.getOwnerId())
                 .createdDate(project.getCreatedDate())
                 .build();
+    }
+
+    public void mergeProject(Project project, UpdateProjectRequest request) {
+        if (StringUtils.isNotBlank(request.getTitle()) && !request.getTitle().equals(project.getTitle()))
+            project.setTitle(request.getTitle());
+
+        if (StringUtils.isNotBlank(request.getDescription()) && !request.getDescription().equals(project.getDescription()))
+            project.setDescription(request.getDescription());
     }
 }
