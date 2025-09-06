@@ -64,12 +64,24 @@ public class ProjectServiceImpl implements IProjectService {
 
     @Override
     public ProjectResponse updateProject(String id, UpdateProjectRequest request) {
-        return null;
+        Project project = validateProject(id);
+
+        projectCacheService.evict(id);
+        projectMapper.mergeProject(project, request);
+        Project projectResponse = projectRepository.save(project);
+
+        return projectMapper.toProjectResponse(projectResponse);
     }
 
     @Override
     public void deleteProject(String id) {
         projectRepository.deleteById(id);
         projectCacheService.evict(id);
+    }
+
+    private Project validateProject(String projectId) {
+        return projectRepository
+                .findById(projectId)
+                .orElseThrow(() -> new BusinessException(PROJECT_NOT_FOUND));
     }
 }
