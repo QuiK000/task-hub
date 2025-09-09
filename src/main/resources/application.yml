@@ -25,10 +25,17 @@ spring:
         format_sql: true
       default_schema: public
       database-platform: org.hibernate.dialect.PostgreSQLDialect
+  cache:
+    type: redis
+    redis:
+      time-to-live: 300000
+      cache-null-values: false
+      use-key-prefix: true
+      key-prefix: "cache::"
 
 app:
   cache:
-    ttl-seconds: 300
+
   security:
     jwt:
       access-token-expiration: 86400000
